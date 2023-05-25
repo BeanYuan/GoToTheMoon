@@ -1,2 +1,2 @@
 # GoToTheMoon
-CMPM120 final project
+This game is a 2d platform narrative game.
