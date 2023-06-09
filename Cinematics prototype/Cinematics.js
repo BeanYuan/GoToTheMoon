@@ -18,8 +18,8 @@ class cinpro extends Phaser.Scene{
 
         let start = this.sound.add(
             "intro",
-           );
-           start.play();
+        );
+        start.play();
 
         let ff = this.add.image(
             0,
@@ -290,6 +290,20 @@ class Menu extends Phaser.Scene{
             });
         });
 
+
+        play.setInteractive();
+        play.on('pointerdown', () => {
+            this.scene.start('gameplay');
+        });
+
+        controls.on('pointerdown', () => {
+            this.scene.start('controls');
+        });
+
+        credits.on('pointerdown', () => {
+            this.scene.start('credits');
+        });
+
         
         //The following twinkling star code was assisted with ChatGPT
 
@@ -328,27 +342,129 @@ class Menu extends Phaser.Scene{
 
 
         
-  
-
-
-        
 
         
 
 
 
 
-        
 
         
-
-
     }
 
 
 
+    
+
+}
+
+
+class Core extends Phaser.Scene{
+    constructor() {
+        super('gameplay');
+    }
+
+    preload(){
+        this.load.path = '../assets/';
+        this.load.image('wood', 'sign.png');
+
+    }
+
+    create(){
+
+    let sign = this.add.image(
+        960,
+        1000,
+        'wood',
+    )
+    sign.setScale(1);
+
+    let mesg = this.add.text(
+        800, 
+        540,
+        "Under Construction, \n game will go here",
+        {
+           font: "45px Garamond",
+           color: "#000000"
+        }
+     );
+     load.setOrigin(0.5);
+
+    }
+
+}
+
+
+class Controls extends Phaser.Scene{
+    constructor() {
+        super('controls');
+    }
+
+    preload(){
+        this.load.path = '../assets/';
+        this.load.image('wood', 'sign.png');
+
+    }
+
+    create(){
+
+    let sign = this.add.image(
+        960,
+        1000,
+        'wood',
+    )
+    sign.setScale(1);
+
+    let mesg = this.add.text(
+        800, 
+        540,
+        "Under Construction, \n controls will go here",
+        {
+           font: "45px Garamond",
+           color: "#000000"
+        }
+     );
+     
+
+    }
+
 
     
+
+}
+
+class Credit extends Phaser.Scene{
+    constructor() {
+        super('credits');
+    }
+
+    preload(){
+        this.load.path = '../assets/';
+        this.load.image('wood', 'sign.png');
+
+    }
+
+    create(){
+
+    let sign = this.add.image(
+        960,
+        1000,
+        'wood',
+    )
+    sign.setScale(1);
+
+    let mesg = this.add.text(
+        800, 
+        540,
+        "Under Construction, \n Credits will go here",
+        {
+           font: "45px Garamond",
+           color: "#000000"
+        }
+     );
+     
+
+    }
 
 }
 
@@ -360,6 +476,6 @@ const game = new Phaser.Game({
         width: 1920, //960
         height: 1080 //540
     },
-    scene: [Menu], //[cinpro, Menu],
+    scene: [cinpro, Menu, Core, Controls, Credit], //[cinpro, Menu],
     title: "Cinematic Prototype",
 });
