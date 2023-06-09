@@ -134,8 +134,8 @@ class Menu extends Phaser.Scene{
 
     preload(){
         this.load.path = '../assets/';
-        this.load.image('menu', 'menuscrn.png');
-        this.load.image('start', 'strt.png');
+        this.load.image('men', 'menuscrn.png');
+        this.load.image('start', 'Play.png');
         this.load.image('cntl', 'cntrl.png');
         this.load.image('cdt', 'crdt.png');
         this.load.image('p', 'prod.png');
@@ -148,36 +148,154 @@ class Menu extends Phaser.Scene{
         let main = this.add.image(
             960,
             540,
-            'menu',
+            'men',
         )
         main.setScale(1);
         main.setAlpha(0);
+        main.setDepth(-1);
 
         let play = this.add.image(
-            960,
-            540,
+            0,
+           500,
             'start',
         )
-        play.setScale(1);
-        play.setAlpha(0);
+        play.setScale(.2);
+        //play.setAlpha(0);
 
         let controls = this.add.image(
-            960, 
-            560,
+            2000, 
+            580,
             'cntl',
         )
-        controls.setScale(1);
-        controls.setAlpha(0);
+        controls.setScale(.2);
+        //controls.setAlpha(0);
 
         let credits = this.add.image(
             960,
-            580,
+            2000,
             'cdt',
         )
-        credits.setScale(1);
-        credits.setAlpha(0);
+        credits.setScale(.2);
+        //credits.setAlpha(0);
+
+
+        const timeline = this.add.timeline([
+        {
+            at: 0,
+            tween: {
+                targets: main,
+                duration: 3000,
+                alpha: {from: 0, to: 1}, // corrected 'alpha' property name
+            }
+        },
+        {
+
+            at: 4,
+            tween: {
+                targets: play,
+                x: 960,
+                y: 500,
+                duration: 3500,
+                ease: 'Quadratic',
+            },
+        },
+
+        {
+
+            at: 4, 
+            tween: {
+                targets: controls,
+                x: 960,
+                y: 600,
+                duration: 3500,
+                ease: 'Quadratic',
+            },
+
+
+        },
+
+        {
+
+            at: 4, 
+            tween: {
+                targets: credits,
+                x: 960,
+                y: 700,
+                duration: 3500,
+                ease: 'Quadratic',
+            },
+
+
+        },
 
         
+        ]);
+
+        timeline.play();
+
+        play.setInteractive();
+        play.on('pointerover', () => {
+            this.tweens.add({
+                targets: play,
+                scaleX: .3,
+                scaleY: .3,
+                duration: 100
+            });
+        });
+
+        play.on('pointerout', () => {
+            this.tweens.add({
+                targets: play,
+                scaleX: .2,
+                scaleY: .2,
+                duration: 100
+            });
+        });
+
+        credits.setInteractive();
+        credits.on('pointerover', () => {
+            this.tweens.add({
+                targets: credits,
+                scaleX: .3,
+                scaleY: .3,
+                duration: 100
+            });
+        });
+
+        credits.on('pointerout', () => {
+            this.tweens.add({
+                targets: credits,
+                scaleX: .2,
+                scaleY: .2,
+                duration: 100
+            });
+        });
+
+        controls.setInteractive();
+        controls.on('pointerover', () => {
+            this.tweens.add({
+                targets: controls,
+                scaleX: .3,
+                scaleY: .3,
+                duration: 100
+            });
+        });
+
+        controls.on('pointerout', () => {
+            this.tweens.add({
+                targets: controls,
+                scaleX: .2,
+                scaleY: .2,
+                duration: 100
+            });
+        });
+
+
+        
+
+        
+
+
 
 
         
@@ -202,6 +320,6 @@ const game = new Phaser.Game({
         width: 1920, //960
         height: 1080 //540
     },
-    scene: [cinpro, Menu],
+    scene: [Menu], //[cinpro, Menu],
     title: "Cinematic Prototype",
 });
