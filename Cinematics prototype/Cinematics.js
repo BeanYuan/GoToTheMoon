@@ -138,7 +138,7 @@ class Menu extends Phaser.Scene{
         this.load.image('start', 'Play.png');
         this.load.image('cntl', 'cntrl.png');
         this.load.image('cdt', 'crdt.png');
-        this.load.image('p', 'prod.png');
+        this.load.image('star', 'star.png');
         this.load.audio('intro', 'introa.mp3')
     }
 
@@ -289,6 +289,46 @@ class Menu extends Phaser.Scene{
                 duration: 100
             });
         });
+
+        
+        //The following twinkling star code was assisted with ChatGPT
+
+
+        this.stars = this.add.group();
+
+        // Generate random star positions
+        const numStars = 100;
+        for (let i = 0; i < numStars; i++) {
+        const x = Phaser.Math.Between(0, this.cameras.main.width);
+        const y = Phaser.Math.Between(0, this.cameras.main.height);
+
+        // Create a star sprite and add it to the group
+        const star = this.add.sprite(x, y, 'star');
+        this.stars.add(star);
+        }
+        
+
+        // Start the twinkle animation
+        this.twinkleStars();
+    }
+
+    twinkleStars() {
+        // Define the twinkle animation
+        this.stars.getChildren().forEach(star => {
+        this.tweens.add({
+            scale: {from: 0.01, to: 0.06},
+            depth: -1,
+            targets: star,
+            alpha: { from: 0.001, to: 1 },
+            duration: Phaser.Math.Between(1000, 3000),
+            repeat: -1, 
+            yoyo: true, 
+        });
+        });
+
+
+        
+  
 
 
         
