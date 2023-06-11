@@ -133,7 +133,7 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.path = '/assets/';
+        this.load.path = './assets/';
         this.load.image('men', 'menuscrn.png');
         this.load.image('start', 'Play.png');
         this.load.image('cntl', 'cntrl.png');
@@ -368,7 +368,7 @@ class Core extends Phaser.Scene{
     }
 
     preload(){
-        this.load.path = '/assets/';
+        this.load.path = './assets/';
         this.load.image('wood', 'sign.png');
 
     }
@@ -423,7 +423,7 @@ class Controls extends Phaser.Scene{
     }
 
     preload(){
-        this.load.path = '/assets/';
+        this.load.path = './assets/';
         this.load.image('wood', 'sign.png');
 
     }
@@ -469,7 +469,7 @@ class Credit extends Phaser.Scene{
     }
 
     preload(){
-        this.load.path = '/assets/';
+        this.load.path = './assets/';
         this.load.image('wood', 'sign.png');
 
     }
