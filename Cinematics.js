@@ -11,15 +11,15 @@ class cinpro extends Phaser.Scene{
         this.load.image('x', 'X.png');
         this.load.image('bckgrnd', 'backback.png');
         this.load.image('p', 'prod.png');
-        //this.load.audio('intro', 'introa.mp3')
+        this.load.audio('intro', 'introa.mp3')
     }
 
     create() {
 
-        // let start = this.sound.add(
-        //     "intro",
-        // );
-        // start.play();
+        let start = this.sound.add(
+            "intro",
+        );
+        start.play();
 
         let ff = this.add.image(
             0,
