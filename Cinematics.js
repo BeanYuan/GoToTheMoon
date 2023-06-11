@@ -4,7 +4,7 @@ class cinpro extends Phaser.Scene{
     }
 
     preload(){
-        this.load.path = '../assets/';
+        this.load.path = './assets/';
         this.load.image('f', 'F.png');
         this.load.image('l', 'L.png');
         this.load.image('u', 'U.png');
