@@ -155,7 +155,7 @@ class Menu extends Phaser.Scene{
         main.setDepth(-1);
 
         let play = this.add.image(
-            0,
+            -500,
            500,
             'start',
         )
@@ -163,7 +163,7 @@ class Menu extends Phaser.Scene{
         //play.setAlpha(0);
 
         let controls = this.add.image(
-            2000, 
+            2500, 
             580,
             'cntl',
         )
@@ -195,7 +195,8 @@ class Menu extends Phaser.Scene{
                 targets: play,
                 x: 960,
                 y: 500,
-                duration: 3500,
+                delay: 750,
+                duration: 3000,
                 ease: 'Quadratic',
             },
         },
@@ -207,7 +208,8 @@ class Menu extends Phaser.Scene{
                 targets: controls,
                 x: 960,
                 y: 600,
-                duration: 3500,
+                delay: 750,
+                duration: 3000,
                 ease: 'Quadratic',
             },
 
@@ -221,7 +223,8 @@ class Menu extends Phaser.Scene{
                 targets: credits,
                 x: 960,
                 y: 700,
-                duration: 3500,
+                delay: 750,
+                duration: 3000,
                 ease: 'Quadratic',
             },
 
@@ -377,18 +380,37 @@ class Core extends Phaser.Scene{
         1000,
         'wood',
     )
-    sign.setScale(1);
+    sign.setScale(1.3);
+    //sign.setAlpha(0);
 
-    let mesg = this.add.text(
+    let mesg1 = this.add.text(
         800, 
         540,
-        "Under Construction, \n game will go here",
+        " Under Construction \n Game will go here",
         {
            font: "45px Garamond",
            color: "#000000"
         }
      );
-     load.setOrigin(0.5);
+     mesg1.setOrigin(-0.1, 1.5);
+
+     let mesg2 = this.add.text(
+        800, 
+        540,
+        "https://beanyuan.github.io/FinalProjectCoreGamePlay/",
+        {
+           font: "45px Garamond",
+           color: "#000000"
+        }
+     );
+     mesg2.setOrigin(0.27, 1);
+
+     this.tweens.add({
+        targets: [sign, mesg1, mesg2],
+        alpha: {start: 0, to: 1},
+        duration: 4000,
+        ease: 'Quadratic',
+     });
 
     }
 
@@ -418,12 +440,20 @@ class Controls extends Phaser.Scene{
     let mesg = this.add.text(
         800, 
         540,
-        "Under Construction, \n controls will go here",
+        "Under Construction \n Controls will go here",
         {
            font: "45px Garamond",
            color: "#000000"
         }
      );
+
+
+     this.tweens.add({
+        targets: [sign, mesg],
+        alpha: {start: 0, to: 1},
+        duration: 4000,
+        ease: 'Quadratic',
+     });
      
 
     }
@@ -456,12 +486,20 @@ class Credit extends Phaser.Scene{
     let mesg = this.add.text(
         800, 
         540,
-        "Under Construction, \n Credits will go here",
+        "Under Construction \n Credits will go here",
         {
            font: "45px Garamond",
            color: "#000000"
         }
      );
+
+
+     this.tweens.add({
+        targets: [sign, mesg],
+        alpha: {start: 0, to: 1},
+        duration: 4000,
+        ease: 'Quadratic',
+     });
      
 
     }
@@ -476,6 +514,6 @@ const game = new Phaser.Game({
         width: 1920, //960
         height: 1080 //540
     },
-    scene: [cinpro, Menu, Core, Controls, Credit], //[cinpro, Menu],
+    scene: [cinpro, Menu, Core, Controls, Credit], 
     title: "Cinematic Prototype",
 });
