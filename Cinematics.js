@@ -134,7 +134,7 @@ class Menu extends Phaser.Scene{
 
     preload(){
         this.load.path = './assets/';
-        this.load.image('men', 'menuscrn.png');
+        this.load.image('men', 'menuscrn.jpg');
         this.load.image('start', 'Play.png');
         this.load.image('cdt', 'crdt.png');
         this.load.image('star', 'star.png');
@@ -150,7 +150,7 @@ class Menu extends Phaser.Scene{
             540,
             'men',
         )
-        main.setScale(.8);
+        main.setScale(2.3);
         main.setAlpha(0);
         main.setDepth(-1);
 
@@ -159,7 +159,7 @@ class Menu extends Phaser.Scene{
             350,
             'ttl'
         )
-        ttl.setScale(4);
+        ttl.setScale(7);
         ttl.setAlpha(0);
         
 
@@ -198,7 +198,7 @@ class Menu extends Phaser.Scene{
             tween: {
                 targets: play,
                 x: 960,
-                y: 500,
+                y: 700,
                 delay: 750,
                 duration: 3000,
                 ease: 'Quadratic',
@@ -211,7 +211,7 @@ class Menu extends Phaser.Scene{
             tween: {
                 targets: credits,
                 x: 960,
-                y: 600,
+                y: 800,
                 delay: 750,
                 duration: 3000,
                 ease: 'Quadratic',
