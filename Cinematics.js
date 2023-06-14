@@ -136,10 +136,10 @@ class Menu extends Phaser.Scene{
         this.load.path = './assets/';
         this.load.image('men', 'menuscrn.png');
         this.load.image('start', 'Play.png');
-        this.load.image('cntl', 'cntrl.png');
         this.load.image('cdt', 'crdt.png');
         this.load.image('star', 'star.png');
-        this.load.audio('intro', 'introa.mp3')
+        this.load.audio('intro', 'introa.mp3');
+        this.load.image('ttl', 'title.png');
     }
 
     create() {
@@ -150,9 +150,18 @@ class Menu extends Phaser.Scene{
             540,
             'men',
         )
-        main.setScale(1);
+        main.setScale(.8);
         main.setAlpha(0);
         main.setDepth(-1);
+
+        let ttl = this.add.image(
+            960, 
+            350,
+            'ttl'
+        )
+        ttl.setScale(4);
+        ttl.setAlpha(0);
+        
 
         let play = this.add.image(
             -500,
@@ -162,17 +171,11 @@ class Menu extends Phaser.Scene{
         play.setScale(.2);
         //play.setAlpha(0);
 
-        let controls = this.add.image(
-            2500, 
-            580,
-            'cntl',
-        )
-        controls.setScale(.2);
-        //controls.setAlpha(0);
+       
 
         let credits = this.add.image(
-            960,
-            2000,
+            2500,
+            580,
             'cdt',
         )
         credits.setScale(.2);
@@ -183,9 +186,10 @@ class Menu extends Phaser.Scene{
         {
             at: 0,
             tween: {
-                targets: main,
+                targets: [main, ttl],
                 duration: 3000,
                 alpha: {from: 0, to: 1}, // corrected 'alpha' property name
+                
             }
         },
         {
@@ -205,24 +209,9 @@ class Menu extends Phaser.Scene{
 
             at: 4, 
             tween: {
-                targets: controls,
-                x: 960,
-                y: 600,
-                delay: 750,
-                duration: 3000,
-                ease: 'Quadratic',
-            },
-
-
-        },
-
-        {
-
-            at: 4, 
-            tween: {
                 targets: credits,
                 x: 960,
-                y: 700,
+                y: 600,
                 delay: 750,
                 duration: 3000,
                 ease: 'Quadratic',
@@ -274,33 +263,10 @@ class Menu extends Phaser.Scene{
             });
         });
 
-        controls.setInteractive();
-        controls.on('pointerover', () => {
-            this.tweens.add({
-                targets: controls,
-                scaleX: .3,
-                scaleY: .3,
-                duration: 100
-            });
-        });
-
-        controls.on('pointerout', () => {
-            this.tweens.add({
-                targets: controls,
-                scaleX: .2,
-                scaleY: .2,
-                duration: 100
-            });
-        });
-
 
         play.setInteractive();
         play.on('pointerdown', () => {
             this.scene.start('gameplay');
-        });
-
-        controls.on('pointerdown', () => {
-            this.scene.start('controls');
         });
 
         credits.on('pointerdown', () => {
@@ -314,13 +280,14 @@ class Menu extends Phaser.Scene{
         this.stars = this.add.group();
 
         // Generate random star positions
-        const numStars = 100;
+        const numStars = 200;
         for (let i = 0; i < numStars; i++) {
         const x = Phaser.Math.Between(0, this.cameras.main.width);
         const y = Phaser.Math.Between(0, this.cameras.main.height);
 
         // Create a star sprite and add it to the group
         const star = this.add.sprite(x, y, 'star');
+        star.setAlpha(0);
         this.stars.add(star);
         }
         
@@ -344,13 +311,6 @@ class Menu extends Phaser.Scene{
         });
 
 
-        
-
-        
-
-
-
-
 
         
     }
@@ -370,98 +330,39 @@ class Core extends Phaser.Scene{
     preload(){
         this.load.path = './assets/';
         this.load.image('wood', 'sign.png');
+        this.load.image('star', 'star.png')
 
     }
 
     create(){
 
-    let sign = this.add.image(
-        960,
-        1000,
-        'wood',
-    )
-    sign.setScale(1.3);
-    //sign.setAlpha(0);
-
-    let mesg1 = this.add.text(
-        800, 
-        540,
-        " Under Construction \n Game will go here",
-        {
-           font: "45px Garamond",
-           color: "#000000"
-        }
-     );
-     mesg1.setOrigin(-0.1, 1.5);
+    
+     //mesg1.fontSize(100);
+     
+     
 
      let mesg2 = this.add.text(
         800, 
         540,
-        "https://beanyuan.github.io/FinalProjectCoreGamePlay/",
+        " Team: Austin Chen, Izaiah Lozano, Lizhuoyuan Wan \n Art: Austin Chen, Izaiah Lozano, Lizhuoyuan Wan \n Game Mechanics: Lizhuoyuan Wan \n Animation: Austin Chen, Izaiah Lozano \n ",
         {
            font: "45px Garamond",
-           color: "#000000"
+           color: "#f5f2f8"
         }
      );
-     mesg2.setOrigin(0.27, 1);
+     mesg2.setOrigin(0.2, 1);
 
-     this.tweens.add({
-        targets: [sign, mesg1, mesg2],
-        alpha: {start: 0, to: 1},
-        duration: 4000,
-        ease: 'Quadratic',
-     });
+    //  this.tweens.add({
+    //     targets: [sign, mesg1, mesg2],
+    //     alpha: {start: 0, to: 1},
+    //     duration: 4000,
+    //     ease: 'Quadratic',
+    //  });
 
     }
 
 }
 
-
-class Controls extends Phaser.Scene{
-    constructor() {
-        super('controls');
-    }
-
-    preload(){
-        this.load.path = './assets/';
-        this.load.image('wood', 'sign.png');
-
-    }
-
-    create(){
-
-    let sign = this.add.image(
-        960,
-        1000,
-        'wood',
-    )
-    sign.setScale(1);
-
-    let mesg = this.add.text(
-        800, 
-        540,
-        "Under Construction \n Controls will go here",
-        {
-           font: "45px Garamond",
-           color: "#000000"
-        }
-     );
-
-
-     this.tweens.add({
-        targets: [sign, mesg],
-        alpha: {start: 0, to: 1},
-        duration: 4000,
-        ease: 'Quadratic',
-     });
-     
-
-    }
-
-
-    
-
-}
 
 class Credit extends Phaser.Scene{
     constructor() {
@@ -470,37 +371,118 @@ class Credit extends Phaser.Scene{
 
     preload(){
         this.load.path = './assets/';
-        this.load.image('wood', 'sign.png');
+        this.load.image('bck', 'bckbtn.png');
+        this.load.image('star', 'start.png');
 
     }
 
     create(){
 
-    let sign = this.add.image(
-        960,
-        1000,
-        'wood',
-    )
-    sign.setScale(1);
+        this.cameras.main.fadeIn(2000, 0,5,25);
 
-    let mesg = this.add.text(
-        800, 
-        540,
-        "Under Construction \n Credits will go here",
-        {
-           font: "45px Garamond",
-           color: "#000000"
+
+        //The following twinkling star code was assisted with ChatGPT
+    
+    
+        this.stars = this.add.group();
+    
+        // Generate random star positions
+        const numStars = 200;
+        for (let i = 0; i < numStars; i++) {
+        const x = Phaser.Math.Between(0, this.cameras.main.width);
+        const y = Phaser.Math.Between(0, this.cameras.main.height);
+    
+        // Create a star sprite and add it to the group
+        const star = this.add.sprite(x, y, 'star');
+        this.stars.add(star);
         }
-     );
-
-
-     this.tweens.add({
-        targets: [sign, mesg],
-        alpha: {start: 0, to: 1},
-        duration: 4000,
-        ease: 'Quadratic',
-     });
+        
+    
+        // Start the twinkle animation
+        this.twinkleStars();
+    }
+    
+        twinkleStars() {
+            // Define the twinkle animation
+            this.stars.getChildren().forEach(star => {
+            this.tweens.add({
+                scale: {from: 0.01, to: 0.06},
+                depth: -1,
+                targets: star,
+                alpha: { from: 0.001, to: 1 },
+                duration: Phaser.Math.Between(1000, 3000),
+                repeat: -1, 
+                yoyo: true, 
+            });
+            });
+    
+    
      
+    
+
+        let mesg1 = this.add.text(
+            960, 
+            200,
+            "CREDITS",
+            {
+            font: "45px Garamond",
+            //fontSize: 100,
+            color: "#ffffff"
+            }
+        );
+        mesg1.setOrigin(.5, 3);
+        //mesg1.fontSize(100);
+        
+        
+
+        let mesg2 = this.add.text(
+            800, 
+            540,
+            " Team: Austin Chen, Izaiah Lozano, Lizhuoyuan Wan \n Art: Austin Chen, Izaiah Lozano, Lizhuoyuan Wan \n Game Mechanics: Lizhuoyuan Wan \n Animation: Austin Chen, Izaiah Lozano \n ",
+            {
+            font: "45px Garamond",
+            color: "#f5f2f8"
+            }
+        );
+        mesg2.setOrigin(0.2, 1);
+
+
+        let bckbtn = this.add.image(
+            960,
+            1000,
+            'bck',
+        )
+        bckbtn.setScale(.5);
+
+
+
+
+        bckbtn.setInteractive();
+        bckbtn.on('pointerover', () => {
+            this.tweens.add({
+                targets: bckbtn,
+                scaleX: .7,
+                scaleY: .7,
+                duration: 100
+            });
+        });
+
+        bckbtn.on('pointerout', () => {
+            this.tweens.add({
+                targets: bckbtn,
+                scaleX: .5,
+                scaleY: .5,
+                duration: 100
+            });
+        });
+
+        bckbtn.setInteractive();
+        bckbtn.on('pointerdown', () => {
+            this.scene.start('menu');
+        });
+
+
+        
 
     }
 
@@ -514,6 +496,6 @@ const game = new Phaser.Game({
         width: 1920, //960
         height: 1080 //540
     },
-    scene: [cinpro, Menu, Core, Controls, Credit], 
-    title: "Cinematic Prototype",
+    scene: [cinpro, Menu, Core, Credit], 
+    title: "To the Moon",
 });
